@@ -27,6 +27,9 @@ function Rutam() {
             {contextHolder}
             <h1 className="App-link">Hello world</h1>
             <Button onClick={info} type="primary">Button</Button>
+            <Button type="link" href="/signup" block>
+                Link
+            </Button>
         </div>
     );
 }
