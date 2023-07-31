@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import firebase from "firebase/compat/app";
 import { getAnalytics } from "firebase/analytics";
-// import getAnalytics from "firebase/compat/analytics"
+import { onAuthStateChanged, setPersistence, browserSessionPersistence } from "firebase/auth";
 const firebaseui = require('firebaseui');
 
 
@@ -21,15 +21,17 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
+export const app = firebase.initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 // faAnalytics.logEvent(analytics, 'app_loaded');
 
 // Initialize Firebase Authentication and get a reference to the service
-const auth = app.auth();
+export const auth = app.auth();
 
 // Initialize the FirebaseUI Widget using Firebase.
 export const ui = new firebaseui.auth.AuthUI(auth);
+
+export const userInfo = { firebaseUser: null };
 
 export const uiConfig = {
     callbacks: {
@@ -37,7 +39,8 @@ export const uiConfig = {
             // User successfully signed in.
             // Return type determines whether we continue the redirect automatically
             // or whether we leave that to developer to handle.
-            return true;
+            console.log(`Auth result: ${authResult}, Redirect URL: ${redirectUrl}`)
+            return false;
         },
         uiShown: function () {
             // The widget is rendered.
@@ -47,7 +50,7 @@ export const uiConfig = {
     },
     // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
     signInFlow: 'popup',
-    signInSuccessUrl: '/home',
+    // signInSuccessUrl: '/home',
     signInOptions: [
         // List of OAuth providers supported.
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
@@ -55,3 +58,35 @@ export const uiConfig = {
     ],
     // Other config options...
 }
+
+// onAuthStateChanged(auth, (user) => {
+//     if (user) {
+//         // User is signed in, see docs for a list of available properties
+//         // https://firebase.google.com/docs/reference/js/auth.user
+//         console.log("User found! fbconfig.js")
+//         const uid = user.uid;
+//         console.log(`Id: ${uid} fbconfig.js`)
+//         userInfo.firebaseUser = { ...user };
+//         // ...
+//     } else {
+//         // User is signed out
+//         // ...
+//         console.log("Signed out. fbconfig.js")
+//     }
+// });
+
+
+setPersistence(auth, browserSessionPersistence)
+    .then(() => {
+        // Existing and future Auth states are now persisted in the current
+        // session only. Closing the window would clear any existing state even
+        // if a user forgets to sign out.
+        // ...
+        // New sign-in will be persisted with session persistence.
+        // return signInWithEmailAndPassword(auth, email, password);
+    })
+    .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+    });
