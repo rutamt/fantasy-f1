@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import firebase from "firebase/compat/app";
-import { getAnalytics, logEvent } from "firebase/analytics";
+import { getAnalytics } from "firebase/analytics";
+// import getAnalytics from "firebase/compat/analytics"
 const firebaseui = require('firebaseui');
 
 
@@ -22,7 +23,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-logEvent(analytics, 'app_loaded');
+// faAnalytics.logEvent(analytics, 'app_loaded');
 
 // Initialize Firebase Authentication and get a reference to the service
 const auth = app.auth();

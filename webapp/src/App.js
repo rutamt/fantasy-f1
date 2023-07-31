@@ -3,14 +3,15 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import Rutam from "./components/Rutam";
-import SignUp from "./components/SignUp";
-import Home from "./components/Home";
+import RootPage from "./pages/RootPage";
+import SignUpPage from "./pages/SignUpPage";
+import HomePage from "./pages/HomePage";
+
 
 const router = createBrowserRouter([
-  { path: "/", element: <Rutam /> },
-  { path: "/signup", element: <SignUp /> },
-  { path: "/home", element: <Home /> },
+  { path: "/", element: <RootPage /> },
+  { path: "/signup", element: <SignUpPage /> },
+  { path: "/home", element: <HomePage /> },
 ]);
 
 function App() {
