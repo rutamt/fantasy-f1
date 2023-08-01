@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+    /* Define font variable values */
+    --font: 'PT Sans', sans-serif;
+}
+
+
+
+/* Now, use the variable font in your styles */
+h1,
+h2,
+h3 {
+    font-family: var(--font);
+}
+
+
+.hero {
+    width: 100%;
+    height: 100%;
+}
+
+/* Position the parent container (adjust the selector as needed) */
+.parent-container {
+    position: relative;
+}
+
+/* Position the firebaseui-auth-container div on top of the hero image */
+#firebaseui-auth-container,
+#loader {
+    position: absolute;
+    top: 50%;
+    /* Center the top edge at 50% of the viewport height */
+    left: 50%;
+    /* Center the left edge at 50% of the viewport width */
+    transform: translate(-50%, -50%);
+    /* Center the element itself */
+    /* You can adjust the top, left, and transform properties as needed for fine-tuning */
+    z-index: 0;
+    /* Ensure the div appears above the image */
+}
+
+/* Position the header text on top of the image */
+.header {
+    position: absolute;
+    top: 10%;
+    /* Adjust the top value to position the header text vertically */
+    left: 50%;
+    /* Adjust the left value to position the header text horizontally */
+    color: white;
+    text-shadow: 0 0 5px black;
+    font-size: 2rem;
+    /* Adjust the font size as needed */
+    z-index: 0;
+    /* Ensure the header text appears above the image and other content */
+    text-align: left;
+    transform: translate(-50%, -50%);
+
+}

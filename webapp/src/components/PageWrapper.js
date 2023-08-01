@@ -1,9 +1,7 @@
 import { Component } from 'react';
-import { Menu, Layout, Button } from 'antd';
-import { SwapRightOutlined, CarOutlined } from "@ant-design/icons";
+import { Menu, Layout } from 'antd';
 import { signOut, onAuthStateChanged } from "firebase/auth";
-import FbUser from '../firebase/FbUser';
-import { auth, userInfo } from "../firebase/fbconfig";
+import { auth } from "../firebase/fbconfig";
 import { Link } from 'react-router-dom';
 
 const { Content, Footer, Header } = Layout;
@@ -32,7 +30,6 @@ class PageWrapper extends Component {
                 // User is signed in, see docs for a list of available properties
                 // https://firebase.google.com/docs/reference/js/auth.user
                 // console.log("User found! Wrapper.js")
-                const uid = user.uid;
                 // console.log(`Id: ${uid} Wrapper.js`)
                 this.setState({ firebaseUser: user })
                 // ...

@@ -1,0 +1,81 @@
+/* index_styles.css */
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+    /* Define font variable values */
+    --font: 'PT Sans', sans-serif;
+}
+
+
+
+/* Now, use the variable font in your styles */
+h1,
+h2,
+h3 {
+    font-family: var(--font);
+}
+
+.article {
+    height: fit-content;
+    /* Allow the container's height to adjust based on its content */
+    position: relative;
+    overflow: hidden;
+}
+
+.image {
+    object-fit: fill;
+    /* Fill the entire container without maintaining aspect ratio */
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    font-size: clamp(2rem, 5vw, 5rem);
+    font-weight: bolder;
+    /* Adjust the font size using clamp() */
+    color: white;
+    text-align: left;
+    left: 5%;
+    text-shadow: 0 0 25px black;
+}
+
+.header-container {
+    position: absolute;
+    top: -3%;
+    /* Adjust this value to position the container vertically */
+    left: 5%;
+    /* Adjust this value to position the container horizontally */
+    width: 80%;
+    /* Adjust the width as needed */
+    text-shadow: 0 0 25px black;
+    color: white;
+    text-align: left;
+}
+
+.subheader {
+    font-size: clamp(18px, 2vw, 40px);
+    /* Adjust the font size using clamp() */
+    text-align: center;
+    margin-top: 5%;
+    text-align: left;
+    overflow: auto;
+    /* Enable vertical scrolling when the content overflows the container */
+}
+
+.list-header {
+    font-family: var(--font);
+    font-size: 1.5rem;
+    /* Adjust the font size as needed */
+    font-weight: bold;
+    /* Use "bold" for emphasis */
+    color: #333;
+    /* Adjust the color to match the website's theme */
+}
+
+.list-content {
+    font-family: var(--font);
+    font-size: 1rem;
+    /* Adjust the font size as needed */
+    color: #333;
+    /* Adjust the color to match the website's theme */
+}
