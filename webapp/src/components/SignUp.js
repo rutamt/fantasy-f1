@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { ui, uiConfig } from "../firebase/fbconfig";
-import signup_hero from "../photos/signup_hero.jpg"
-import signup_hero_vertical from "../photos/signup_hero_vertical.jpg"
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
 import signup_styles from "../styles/signup_styles.css";
+
+const signup_hero = "/images/signup_hero.jpg"
+const signup_hero_vertical = "/images/signup_hero_vertical.jpg"
 
 const antIcon = (
     <LoadingOutlined

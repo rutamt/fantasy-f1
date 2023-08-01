@@ -10,16 +10,19 @@ class PageWrapper extends Component {
 
     constructor(props) {
         super(props);
-        const LoginLink = <Link to="/signup">Login</Link>;
-        const Signout = <div onClick={this.FbSignOut}>Sign out</div>;
+        this.LoginLink = <Link to="/signup">Login</Link>;
+        this.Signout = <div onClick={this.FbSignOut}>Sign out</div>;
 
         this.state = {
             firebaseUser: null,
         };
-        this.state.items = [
+    }
+
+    items() {
+        return [
             { label: <Link to="/" >F1 Fantasy</Link>, key: "root" },
             { label: <Link to="/home">Home</Link>, key: 'home', },
-            { label: this.state.firebaseUser ? Signout : LoginLink, key: "login-out" },
+            { label: this.state.firebaseUser ? this.Signout : this.LoginLink, key: "login-out" },
         ]
     }
 
@@ -73,7 +76,7 @@ class PageWrapper extends Component {
                     >
                         <div className="demo-logo">
                         </div>
-                        <Menu theme="dark" mode="horizontal" items={this.state.items} defaultSelectedKeys={1} />;
+                        <Menu theme="dark" mode="horizontal" items={this.items()} defaultSelectedKeys={1} />;
                     </Header>
 
                     <Content>

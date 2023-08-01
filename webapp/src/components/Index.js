@@ -1,19 +1,21 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Button, List } from 'antd';
-
-import f1_hero from "../photos/f1_hero.jpg";
-import f1_hero_vertical from "../photos/f1-hero-vertical.jpg";
-
-// Importing icons
-import competition from "../photos/icons/competition.png"
-import money from "../photos/icons/money.png"
-import expense from "../photos/icons/expense.png"
-import race from "../photos/icons/race.png"
-import decision from "../photos/icons/decision.png"
-
+import { Row, Col, Button, List, Typography } from 'antd';
 
 import index_styles from "../styles/index_styles.css";
+
+const { Title } = Typography;
+const f1_hero = "/images/f1_hero.jpg";
+const f1_hero_vertical = "/images/f1-hero-vertical.jpg";
+
+// Importing icons
+const competition = "/images/icons/competition.png"
+const money = "/images/icons/money.png"
+const expense = "/images/icons/expense.png"
+const race = "/images/icons/race.png"
+const decision = "/images/icons/decision.png"
+
+
 
 function Index() {
     const [imageSrc, setImageSrc] = useState(f1_hero); // Initial image source
@@ -77,10 +79,10 @@ function Index() {
                 <div className="header-container">
                     <Row justify="center" align="middle">
                         <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-                            <h1 className="header">Welcome to F1 Manager</h1>
-                            <h2 className="subheader">
+                            <Title >Welcome to F1 Manager</Title>
+                            <Title level={2}>
                                 On the Fantasy F1 platform, we bring you a thrilling fusion of fantasy F1 racing and business management. Step into the shoes of a team owner and unleash your inner entrepreneur as you strive to conquer the world of Formula 1 and emerge as the most prosperous team owner.
-                            </h2>
+                            </Title>
                             <Button><Link to="/signup">Get Started</Link></Button>
                         </Col>
                     </Row>
