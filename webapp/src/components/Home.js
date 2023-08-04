@@ -1,64 +1,230 @@
 import React, { useState } from "react";
-import { Modal, Card, Image, Typography, Space, Row, Col } from "antd";
-import { EditOutlined } from "@ant-design/icons";
+import {
+  Modal,
+  Card,
+  Typography,
+  Space,
+  Row,
+  Col,
+  Select,
+  Form,
+  Button,
+} from "antd";
+import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 
+const ModalForm = ({ open, onCancel, cardCreate }) => {
+  const [form] = Form.useForm();
+  const onOk = () => {
+    form.submit();
+    //   setIsModalOpen(false);
+  };
+  const onFinish = (values) => {
+    // Form succsess, handle data here
+    console.log("Received values of form:", values);
+
+    cardCreate(values);
+
+    onCancel();
+  };
+
+  return (
+    <Modal
+      title="Team management"
+      open={open}
+      onOk={onOk}
+      onCancel={onCancel}
+      getContainer={false}
+    >
+      <Form form={form} layout="vertical" onFinish={onFinish}>
+        {/* Select Driver one */}
+        <Form.Item
+          name="D1"
+          label="Driver one"
+          rules={[
+            {
+              required: true,
+              message: "Missing driver",
+            },
+          ]}
+        >
+          <Select
+            showSearch
+            placeholder="Select a driver"
+            optionFilterProp="children"
+            id="select-d1"
+            filterOption={(input, option) =>
+              (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+            }
+            options={[
+              {
+                value: "Lewis Hamilton",
+                label: "Lewis Hamilton",
+              },
+              {
+                value: "Lando Norris",
+                label: "Lando Norris",
+              },
+              {
+                value: "Max Verstappen",
+                label: "Max Verstappen",
+              },
+            ]}
+          />
+        </Form.Item>
+
+        {/* Select driver two */}
+        <Form.Item
+          name="D2"
+          label="Driver two"
+          rules={[
+            {
+              required: true,
+              message: "Missing driver",
+            },
+          ]}
+        >
+          <Select
+            showSearch
+            placeholder="Select a second driver"
+            optionFilterProp="children"
+            id="select-d2"
+            filterOption={(input, option) =>
+              (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+            }
+            options={[
+              {
+                value: "George Russell",
+                label: "George Russell",
+              },
+              {
+                value: "Oscar Piastri",
+                label: "Oscar Piastri",
+              },
+              {
+                value: "Sergio Perez",
+                label: "Sergio Perez",
+              },
+            ]}
+          />
+        </Form.Item>
+
+        {/* Select car */}
+        <Form.Item
+          name="Car"
+          label="Car"
+          rules={[
+            {
+              required: true,
+              message: "Missing car",
+            },
+          ]}
+        >
+          <Select
+            showSearch
+            placeholder="Select a car"
+            optionFilterProp="children"
+            id="select-d1"
+            filterOption={(input, option) =>
+              (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+            }
+            options={[
+              {
+                value: "Mercedes",
+                label: "Mercedes",
+              },
+              {
+                value: "Mclaren",
+                label: "Mclaren",
+              },
+              {
+                value: "Red Bull",
+                label: "Red Bull",
+              },
+            ]}
+          />
+        </Form.Item>
+      </Form>
+    </Modal>
+  );
+};
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [cards, setCards] = useState([]);
+
   const showModal = () => {
     setIsModalOpen(true);
   };
-  const handleOk = () => {
+  const hideUserModal = () => {
     setIsModalOpen(false);
   };
-  const handleCancel = () => {
-    setIsModalOpen(false);
+
+  // The card that gets created
+  const addNewCard = (data) => {
+    if (cards.length < 3) {
+      const newCard = (
+        <Card
+          key={data.D1}
+          title={data.D1}
+          extra={data.extra}
+          style={{
+            width: 300,
+          }}
+          actions={[<EditOutlined key="edit" onClick={() => editCard(data)} />]} // Use the editCard function
+        >
+          <Row>
+            <Col span={12}>
+              <Title level={5}>{data.D1}</Title>
+            </Col>
+            <Col span={12}>
+              <Title level={5}>{data.D2}</Title>
+            </Col>
+          </Row>
+          <Space direction="vertical" size={16}>
+            <Title level={5}>{data.Car}</Title>
+          </Space>
+        </Card>
+      );
+
+      setCards([...cards, newCard]);
+    } else {
+      console.log("Maximum number of teams reached.");
+    }
   };
+  // Function to edit an existing card
+  const editCard = (data) => {
+    // Find the index of the card being edited
+    const cardIndex = cards.findIndex((card) => card.key === data.D1);
+    console.log(`Card Index: ${cardIndex}`);
+    if (cardIndex !== -1) {
+      showModal(data); // Open the modal for editing with the card data
+    }
+  };
+
   return (
     <div>
       <h1 className="App-link">Yay, you've signed in!</h1>
-      <Modal
-        title="Basic Modal"
+      <ModalForm
         open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-      </Modal>
+        onCancel={hideUserModal}
+        cardCreate={addNewCard}
+      />
 
-      <Card
-        title="Team 1"
-        extra={"15M"}
-        style={{
-          width: 300,
-        }}
-        actions={[<EditOutlined key="edit" />]}
-      >
-        {" "}
-        <Row>
-          <Col span={12}>
-            <Image
-              width={100}
-              height={100}
-              src="https://www.stickers-garage.com/imgtransform.php?f=1&filename=https://www.stickers-garage.com/resize/720x720/zc/3/f/0/src/sites/stickers/files/products/ma0515.png"
-            />
-          </Col>
-          <Col span={12}>
-            <Image
-              width={100}
-              height={100}
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Lando_Norris_McLaren_driver_number.svg/1200px-Lando_Norris_McLaren_driver_number.svg.png"
-            />
-          </Col>
-        </Row>
-        <Space direction="vertical" size={16}>
-          <Image src="https://e00-especiales-marca.uecdn.es/motor/images/formula1/escuderias/2023/gral/coche-mercedes-mediasombra.png"></Image>
-          <Title level={5}>Mercedes</Title>
+      <Button
+        type="primary"
+        shape="round"
+        icon={<PlusOutlined />}
+        onClick={showModal}
+        id="add-cards-btn"
+      />
+      <div>
+        <Space direction="horizontal">
+          {cards.map((card) => (
+            <div key={card.key}>{card}</div>
+          ))}
         </Space>
-      </Card>
+      </div>
     </div>
   );
 }
