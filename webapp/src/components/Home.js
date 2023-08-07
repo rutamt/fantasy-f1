@@ -9,6 +9,7 @@ import {
   Select,
   Form,
   Button,
+  notification,
 } from "antd";
 import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 
@@ -28,6 +29,49 @@ const ModalForm = ({ open, onCancel, cardCreate }) => {
 
     onCancel();
   };
+
+  const d1Options = [
+    {
+      value: "Lewis Hamilton",
+      label: "Lewis Hamilton",
+    },
+    {
+      value: "Lando Norris",
+      label: "Lando Norris",
+    },
+    {
+      value: "Max Verstappen",
+      label: "Max Verstappen",
+    },
+  ];
+  const d2Options = [
+    {
+      value: "George Russell",
+      label: "George Russell",
+    },
+    {
+      value: "Oscar Piastri",
+      label: "Oscar Piastri",
+    },
+    {
+      value: "Sergio Perez",
+      label: "Sergio Perez",
+    },
+  ];
+  const carOptions = [
+    {
+      value: "Mercedes",
+      label: "Mercedes",
+    },
+    {
+      value: "Mclaren",
+      label: "Mclaren",
+    },
+    {
+      value: "Red Bull",
+      label: "Red Bull",
+    },
+  ];
 
   return (
     <Modal
@@ -57,20 +101,7 @@ const ModalForm = ({ open, onCancel, cardCreate }) => {
             filterOption={(input, option) =>
               (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
             }
-            options={[
-              {
-                value: "Lewis Hamilton",
-                label: "Lewis Hamilton",
-              },
-              {
-                value: "Lando Norris",
-                label: "Lando Norris",
-              },
-              {
-                value: "Max Verstappen",
-                label: "Max Verstappen",
-              },
-            ]}
+            options={d1Options}
           />
         </Form.Item>
 
@@ -93,20 +124,7 @@ const ModalForm = ({ open, onCancel, cardCreate }) => {
             filterOption={(input, option) =>
               (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
             }
-            options={[
-              {
-                value: "George Russell",
-                label: "George Russell",
-              },
-              {
-                value: "Oscar Piastri",
-                label: "Oscar Piastri",
-              },
-              {
-                value: "Sergio Perez",
-                label: "Sergio Perez",
-              },
-            ]}
+            options={d2Options}
           />
         </Form.Item>
 
@@ -129,20 +147,7 @@ const ModalForm = ({ open, onCancel, cardCreate }) => {
             filterOption={(input, option) =>
               (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
             }
-            options={[
-              {
-                value: "Mercedes",
-                label: "Mercedes",
-              },
-              {
-                value: "Mclaren",
-                label: "Mclaren",
-              },
-              {
-                value: "Red Bull",
-                label: "Red Bull",
-              },
-            ]}
+            options={carOptions}
           />
         </Form.Item>
       </Form>
@@ -152,6 +157,15 @@ const ModalForm = ({ open, onCancel, cardCreate }) => {
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cards, setCards] = useState([]);
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotification = (message) => {
+    api["error"]({
+      message: `Error`,
+      description: message,
+      placement: "topLeft",
+    });
+  };
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -165,13 +179,13 @@ function Home() {
     if (cards.length < 3) {
       const newCard = (
         <Card
-          key={data.D1}
-          title={data.D1}
+          key={cards.length + 1}
+          title={`Team ${cards.length + 1}`}
           extra={data.extra}
           style={{
             width: 300,
           }}
-          actions={[<EditOutlined key="edit" onClick={() => editCard(data)} />]} // Use the editCard function
+          actions={[<EditOutlined key="edit" onClick={showModal} />]} // Use the editCard function
         >
           <Row>
             <Col span={12}>
@@ -189,21 +203,15 @@ function Home() {
 
       setCards([...cards, newCard]);
     } else {
+      openNotification("Max teams reached");
       console.log("Maximum number of teams reached.");
-    }
-  };
-  // Function to edit an existing card
-  const editCard = (data) => {
-    // Find the index of the card being edited
-    const cardIndex = cards.findIndex((card) => card.key === data.D1);
-    console.log(`Card Index: ${cardIndex}`);
-    if (cardIndex !== -1) {
-      showModal(data); // Open the modal for editing with the card data
     }
   };
 
   return (
     <div>
+      {contextHolder}
+
       <h1 className="App-link">Yay, you've signed in!</h1>
       <ModalForm
         open={isModalOpen}
