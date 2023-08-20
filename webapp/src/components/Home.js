@@ -10,8 +10,11 @@ import {
   Form,
   Button,
   notification,
+  Input,
+  Popconfirm,
 } from "antd";
-import { EditOutlined, PlusOutlined } from "@ant-design/icons";
+import { EditOutlined, PlusOutlined, DeleteOutlined } from "@ant-design/icons";
+import { nanoid } from "nanoid";
 
 const { Title } = Typography;
 
@@ -82,6 +85,18 @@ const ModalForm = ({ open, onCancel, cardCreate }) => {
       getContainer={false}
     >
       <Form form={form} layout="vertical" onFinish={onFinish}>
+        <Form.Item
+          name="teamName"
+          label="Team name"
+          rules={[
+            {
+              required: true,
+              message: "Missing team name",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
         {/* Select Driver one */}
         <Form.Item
           name="D1"
@@ -154,9 +169,46 @@ const ModalForm = ({ open, onCancel, cardCreate }) => {
     </Modal>
   );
 };
+
+const TeamCard = ({ card, showModal, deleteCard }) => {
+  return (
+    <Card
+      key={card.teamName}
+      title={card.teamName}
+      style={{
+        width: 300,
+      }}
+      actions={[
+        <Popconfirm
+          onConfirm={deleteCard}
+          title="Delete team"
+          description="Are you sure to delete this team?"
+        >
+          <DeleteOutlined />
+        </Popconfirm>,
+        <EditOutlined key="edit" onClick={showModal} />,
+      ]} // Use the editCard function
+    >
+      <Row>
+        <Col span={12}>
+          <Title level={5}>{card.D1}</Title>
+        </Col>
+        <Col span={12}>
+          <Title level={5}>{card.D2}</Title>
+        </Col>
+      </Row>
+      <Space direction="vertical" size={16}>
+        <Title level={5}>{card.Car}</Title>
+      </Space>
+    </Card>
+  );
+};
+
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [cards, setCards] = useState([]);
+  const [mode, setMode] = useState("view"); // view, add, edit
+  const [teamId, setTeamId] = useState(""); // teamId being edited
+  const [cards, setCards] = useState({});
   const [api, contextHolder] = notification.useNotification();
 
   const openNotification = (message) => {
@@ -167,45 +219,34 @@ function Home() {
     });
   };
 
-  const showModal = () => {
+  const showModal = (newMode, editingTeamId) => {
+    if (newMode === "edit") {
+      setTeamId(editingTeamId);
+    } else {
+      setTeamId(nanoid(6));
+    }
+    setMode(newMode);
     setIsModalOpen(true);
   };
   const hideUserModal = () => {
+    setMode("view");
     setIsModalOpen(false);
+  };
+
+  const deleteCard = (cardId) => {
+    // delete the darn thing
+    console.log("about to delete ", cards[cardId]);
+    const newCards = { ...cards };
+    delete newCards[cardId];
+    setCards(newCards);
   };
 
   // The card that gets created
   const addNewCard = (data) => {
-    if (cards.length < 3) {
-      const newCard = (
-        <Card
-          key={cards.length + 1}
-          title={`Team ${cards.length + 1}`}
-          extra={data.extra}
-          style={{
-            width: 300,
-          }}
-          actions={[<EditOutlined key="edit" onClick={showModal} />]} // Use the editCard function
-        >
-          <Row>
-            <Col span={12}>
-              <Title level={5}>{data.D1}</Title>
-            </Col>
-            <Col span={12}>
-              <Title level={5}>{data.D2}</Title>
-            </Col>
-          </Row>
-          <Space direction="vertical" size={16}>
-            <Title level={5}>{data.Car}</Title>
-          </Space>
-        </Card>
-      );
-
-      setCards([...cards, newCard]);
-    } else {
-      openNotification("Max teams reached");
-      console.log("Maximum number of teams reached.");
-    }
+    data.teamId = mode === "add" ? nanoid(6) : teamId;
+    const newCards = { ...cards };
+    newCards[data.teamId] = data;
+    setCards(newCards);
   };
 
   return (
@@ -223,13 +264,19 @@ function Home() {
         type="primary"
         shape="round"
         icon={<PlusOutlined />}
-        onClick={showModal}
+        onClick={() => showModal("add")}
         id="add-cards-btn"
+        disabled={Object.keys(cards).length === 3}
       />
       <div>
         <Space direction="horizontal">
-          {cards.map((card) => (
-            <div key={card.key}>{card}</div>
+          {Object.keys(cards).map((key) => (
+            <TeamCard
+              key={key}
+              card={cards[key]}
+              showModal={() => showModal("edit", key)}
+              deleteCard={() => deleteCard(key)}
+            />
           ))}
         </Space>
       </div>
