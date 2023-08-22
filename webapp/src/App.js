@@ -1,14 +1,16 @@
 import {
   // createBrowserRouter,
   // RouterProvider,
-  Routes, Route, BrowserRouter,
+  Routes,
+  Route,
+  BrowserRouter,
 } from "react-router-dom";
 
 import Index from "./components/Index";
 import SignUp from "./components/SignUp";
 import Home from "./components/Home";
 import PageWrapper from "./components/PageWrapper";
-
+import NewHome from "./components/NewHome";
 
 // const router = createBrowserRouter([
 //   { path: "/", element: <RootPage /> },
@@ -17,14 +19,16 @@ import PageWrapper from "./components/PageWrapper";
 // ]);
 
 function App() {
-  return (<BrowserRouter>
-    <Routes>
-      <Route path="/" element={<PageWrapper page={<Index />} />} />
-      <Route path="/signup" element={<PageWrapper page={<SignUp />} />} />
-      <Route path="/home" element={<PageWrapper page={<Home />} />} />
-    </Routes>
-  </BrowserRouter>)
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* <Route path="/" element={<PageWrapper page={<Index />} />} /> */}
+        <Route path="/" element={<PageWrapper page={<NewHome />} />} />
+        <Route path="/signup" element={<PageWrapper page={<SignUp />} />} />
+        <Route path="/home" element={<PageWrapper page={<Home />} />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
-
 
 export default App;
