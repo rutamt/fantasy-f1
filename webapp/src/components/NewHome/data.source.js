@@ -61,6 +61,7 @@ export const Feature00DataSource = {
               name: "content",
               children: (
                 <p>
+                  {" "}
                   Begin with a fixed budget and strategically allocate funds to
                   build your racing empire. Your business acumen will be tested
                   as you make wise investment decisions for maximum returns.
@@ -125,6 +126,7 @@ export const Feature00DataSource = {
               name: "content",
               children: (
                 <p>
+                  {" "}
                   Engage in head-to-head competition with friends by joining or
                   creating leagues. Showcase your skills in transforming racing
                   success into financial dominance, making every race count in
@@ -136,5 +138,134 @@ export const Feature00DataSource = {
         },
       },
     ],
+  },
+};
+export const Feature60DataSource = {
+  wrapper: { className: "home-page-wrapper feature6-wrapper" },
+  OverPack: { className: "home-page feature6", playScale: 0.3 },
+  Carousel: {
+    className: "feature6-content",
+    dots: false,
+    wrapper: { className: "feature6-content-wrapper" },
+    titleWrapper: {
+      className: "feature6-title-wrapper",
+      barWrapper: {
+        className: "feature6-title-bar-wrapper",
+        children: { className: "feature6-title-bar" },
+      },
+      title: { className: "feature6-title" },
+    },
+    children: [
+      {
+        title: {
+          className: "feature6-title-text",
+          children: <p>Next race</p>,
+        },
+        className: "feature6-item",
+        name: "block0",
+        children: [
+          {
+            md: 8,
+            xs: 24,
+            className: "feature6-number-wrapper",
+            name: "child0",
+            number: {
+              className: "feature6-number",
+              unit: {
+                className: "feature6-unit",
+                children: <p>Days</p>,
+              },
+              toText: true,
+              children: "116",
+            },
+            children: {
+              className: "feature6-text",
+              children: (
+                <p>
+                  <br />
+                </p>
+              ),
+            },
+          },
+          {
+            md: 8,
+            xs: 24,
+            className: "feature6-number-wrapper",
+            name: "child1",
+            number: {
+              className: "feature6-number",
+              unit: {
+                className: "feature6-unit",
+                children: <p>Minutes</p>,
+              },
+              toText: true,
+              children: "1.17",
+            },
+            children: {
+              className: "feature6-text",
+              children: (
+                <p>
+                  <br />
+                </p>
+              ),
+            },
+          },
+          {
+            md: 8,
+            xs: 24,
+            className: "feature6-number-wrapper",
+            name: "child2",
+            number: {
+              className: "feature6-number",
+              unit: {
+                className: "feature6-unit",
+                children: <p>Seconds</p>,
+              },
+              toText: true,
+              children: "2.10",
+            },
+            children: {
+              className: "feature6-text",
+              children: (
+                <p>
+                  <br />
+                </p>
+              ),
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+export const Content110DataSource = {
+  OverPack: {
+    className: "home-page-wrapper content11-wrapper",
+    playScale: 0.3,
+  },
+  titleWrapper: {
+    className: "title-wrapper",
+    children: [
+      {
+        name: "title",
+        children: <p>What are you waiting for?</p>,
+        className: "title-h1",
+      },
+      {
+        name: "content",
+        children: <p>Play Fantasy F1 now!</p>,
+        className: "title-content",
+      },
+    ],
+  },
+  button: {
+    className: "",
+    children: {
+      a: {
+        className: "button",
+        href: "#",
+        children: <p>Play now</p>,
+      },
+    },
   },
 };

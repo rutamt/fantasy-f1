@@ -1,0 +1,84 @@
+.feature6-wrapper {
+  min-height: 360px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.feature6-wrapper.home-page-wrapper .home-page {
+  padding: 64px 24px;
+}
+.feature6-title {
+  display: inline-block;
+}
+.feature6-title-wrapper {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.feature6-title-text {
+  display: inline-block;
+  margin: 0 72px;
+  font-size: 24px;
+  color: #ccc;
+  transition: color 0.45s ease-in-out;
+  cursor: pointer;
+}
+.feature6-title-text.active {
+  color: black;
+}
+.feature6-title-bar {
+  height: 6px;
+  background: black;
+  width: 20%;
+  margin: auto;
+  display: block;
+}
+.feature6-title-bar-wrapper {
+  position: relative;
+  margin-top: 8px;
+  transition: left 0.45s ease-in-out;
+}
+.feature6-number,
+.feature6-text {
+  text-align: center;
+}
+.feature6-number {
+  font-size: 48px;
+  color: black;
+  font-weight: 600;
+}
+.feature6-number-wrapper {
+  text-align: center;
+}
+.feature6-text {
+  font-size: 20px;
+}
+.feature6-unit {
+  font-size: 16px;
+  color: black;
+}
+.feature6 .ant-carousel .slick-dots-bottom {
+  bottom: -24px;
+}
+.feature6 .ant-carousel .slick-dots li button {
+  background: rgba(0, 0, 0, 0.3);
+}
+.feature6 .ant-carousel .slick-dots li.slick-active button {
+  background: black;
+}
+@media screen and (max-width: 767px) {
+  .feature6-wrapper {
+    padding-bottom: 0;
+    min-height: 580px;
+  }
+  .feature6-wrapper.home-page-wrapper .home-page {
+    padding: 56px 24px 64px;
+  }
+  .feature6-title-text {
+    margin: 0 14px;
+  }
+  .feature6-title-bar {
+    width: 40%;
+  }
+  .feature6-number-wrapper {
+    margin-bottom: 16px;
+  }
+}

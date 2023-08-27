@@ -5,8 +5,15 @@ import { enquireScreen } from "enquire-js";
 
 import Banner0 from "./Banner0";
 import Feature0 from "./Feature0";
+import Feature6 from "./Feature6";
+import Content11 from "./Content11";
 
-import { Banner00DataSource, Feature00DataSource } from "./data.source";
+import {
+  Banner00DataSource,
+  Feature00DataSource,
+  Feature60DataSource,
+  Content110DataSource,
+} from "./data.source";
 import "./less/antMotionStyle.css";
 
 let isMobile;
@@ -55,6 +62,18 @@ export default class Home extends React.Component {
         id="Feature0_0"
         key="Feature0_0"
         dataSource={Feature00DataSource}
+        isMobile={this.state.isMobile}
+      />,
+      <Feature6
+        id="Feature6_0"
+        key="Feature6_0"
+        dataSource={Feature60DataSource}
+        isMobile={this.state.isMobile}
+      />,
+      <Content11
+        id="Content11_0"
+        key="Content11_0"
+        dataSource={Content110DataSource}
         isMobile={this.state.isMobile}
       />,
     ];

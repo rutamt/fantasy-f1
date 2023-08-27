@@ -1,3 +1,4 @@
+@homepage: home-page;
 .home-page-wrapper {
   width: 100%;
   position: relative;
@@ -12,7 +13,7 @@
   .title-wrapper > h1,
   > h1 {
     font-size: 32px;
-    color: gray;
+    color: white;
     margin-bottom: 16px;
   }
   .title-wrapper {

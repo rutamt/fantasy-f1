@@ -1,15 +1,17 @@
 #Banner0_0 .banner0-text-wrapper > .llldzvllwm-editor_css {
   font-family: -apple-system, BlinkMacSystemFont, "PT Sans", sans-serif;
 }
-#Banner0_0 .banner0-text-wrapper > .llle34mm6jq-editor_css {
+#Banner0_0 .banner0-text-wrapper > .llldzu5xmc-editor_css {
   font-family: -apple-system, BlinkMacSystemFont, "PT Sans", sans-serif;
-  font-size: 5rem;
-  width: 100%;
-  min-height: 100px;
+  font-size: 1rem;
+  color: rgb(251, 251, 251);
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0);
 }
 #Banner0_0.llldykrsl7t-editor_css {
+  /* background-clip: ; */
   display: flex;
-  font-family: Comic Sans MS;
+  font-family: PT Sans;
   text-decoration: underline;
   background-image: url("https://images.unsplash.com/photo-1602043410209-d57816124451?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80");
   background-attachment: local;
@@ -17,10 +19,9 @@
   background-repeat: no-repeat;
   background-size: 100%;
 }
-#Banner0_0 .banner0-text-wrapper > .llldzu5xmc-editor_css {
-  font-family: -apple-system, BlinkMacSystemFont, "PT Sans", sans-serif;
-  font-size: 1rem;
-  color: rgb(251, 251, 251);
-  text-decoration: none;
-  background-color: rgba(255, 255, 255, 0);
+#Banner0_0 .banner0-text-wrapper > .llle34mm6jq-editor_css {
+  font-family: "PT Sans", sans-serif;
+  font-size: 5rem;
+  width: 100%;
+  min-height: 100px;
 }
